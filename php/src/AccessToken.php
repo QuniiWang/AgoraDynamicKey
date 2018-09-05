@@ -9,11 +9,14 @@ class Message
     public function __construct()
     {
         $this->salt = rand(0, 100000);
-
-        date_default_timezone_set("UTC");
+	
+	$timezone = date_default_timezone_get();
+	
+	date_default_timezone_set("UTC");
         $date = new DateTime();
         $this->ts = $date->getTimestamp() + 24 * 3600;
-
+	//重置时区
+	date_default_timezone_set($timezone);
         $this->privileges = array();
     }
 
